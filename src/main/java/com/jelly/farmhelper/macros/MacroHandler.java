@@ -38,6 +38,8 @@ public class MacroHandler {
     public static CocoaBeanMacroNew cocoaBeanMacro = new CocoaBeanMacroNew();
     public static MushroomMacroNew mushroomMacro = new MushroomMacroNew();
 
+    public static MushroomMacroCustom mushroomMacroCustom = new MushroomMacroCustom();
+
     private final Rotation rotation = new Rotation();
     public static long startTime = 0;
     public static boolean randomizing = false;
@@ -154,8 +156,9 @@ public class MacroHandler {
                 currentMacro = sugarcaneMacro;
             } else if (FarmHelper.config.SShapeMacroType == SMacroEnum.COCOA_BEANS.ordinal()) {
                 currentMacro = cocoaBeanMacro;
-            } else if (FarmHelper.config.SShapeMacroType == SMacroEnum.MUSHROOM.ordinal() ||
-                FarmHelper.config.SShapeMacroType == SMacroEnum.MUSHROOM_ROTATE.ordinal()) {
+            } else if (FarmHelper.config.SShapeMacroType == SMacroEnum.MUSHROOM_ROTATE.ordinal()) {
+                currentMacro = mushroomMacroCustom;
+            } else if (FarmHelper.config.SShapeMacroType == SMacroEnum.MUSHROOM.ordinal()) {
                 currentMacro = mushroomMacro;
             }
             else {

@@ -37,7 +37,7 @@ import java.util.jar.Manifest;
 @Mod(modid = FarmHelper.MODID, name = FarmHelper.NAME, version = FarmHelper.VERSION)
 public class FarmHelper {
     public static final String MODID = "farmhelper";
-    public static final String NAME = "Farm Helper";
+    public static final String NAME = "Florbo Helper";
     // Version gets automatically set. If you wish to change it, change it in the build.gradle.kts file
     public static final String VERSION = "%%VERSION%%";
 

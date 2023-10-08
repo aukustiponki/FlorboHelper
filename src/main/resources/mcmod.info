@@ -1,7 +1,7 @@
 [
   {
     "modid": "farmhelper",
-    "name": "FarmHelper",
+    "name": "FlorboHelper",
     "description": "A mod that helps with stonks",
     "version": "${version}",
     "mcversion": "1.8.9",

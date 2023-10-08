@@ -135,7 +135,7 @@ public class Config extends cc.polyfrost.oneconfig.config.Config {
 					"Cactus", // 3
 					"Cocoa Beans", // 4
 					"Mushroom (45°)", // 5
-					"Mushroom (30° with rotations)", // 6
+					"Mushroom (30° with rotations, Autisti version)", // 6
 			}
 	)
 	public int SShapeMacroType = 0;
@@ -365,7 +365,7 @@ public class Config extends cc.polyfrost.oneconfig.config.Config {
 			name = "Toggle Farm Helper", category = MISCELLANEOUS, subcategory = "Keybinds",
 			description = "Toggles the macro on/off"
 	)
-	public OneKeyBind toggleMacro = new OneKeyBind(Keyboard.KEY_GRAVE);
+	public OneKeyBind toggleMacro = new OneKeyBind(Keyboard.KEY_PERIOD);
 	@KeyBind(
 			name = "Open GUI", category = MISCELLANEOUS, subcategory = "Keybinds",
 			description = "Opens Farm Helper configuration menu"

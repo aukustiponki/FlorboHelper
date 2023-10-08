@@ -11,14 +11,15 @@ import com.jelly.farmhelper.utils.*;
 
 import static com.jelly.farmhelper.utils.BlockUtils.*;
 
-public class MushroomMacroNew extends Macro<MushroomMacroNew.State> {
+public class MushroomMacroCustom extends Macro<MushroomMacroCustom.State> {
     enum State {
         LEFT,
         RIGHT,
         DROPPING,
+        SWITCHNG_LANE,
         NONE
     }
-
+    private int passedLane = 0;
     public static float closest90Yaw = 0;
 
     @Override
@@ -27,7 +28,7 @@ public class MushroomMacroNew extends Macro<MushroomMacroNew.State> {
         if (FarmHelper.config.customPitch) {
             pitch = FarmHelper.config.customPitchLevel;
         } else {
-            pitch = (float) (Math.random() * 2 - 1); // -1 - 1
+            pitch = (float) (Math.random() +5); // -1 - 1
         }
         if (FarmHelper.config.customYaw) {
             yaw = FarmHelper.config.customYawLevel;
@@ -67,7 +68,7 @@ public class MushroomMacroNew extends Macro<MushroomMacroNew.State> {
         if (lastTp.isScheduled() && lastTp.getRemainingTime() < 500 && !rotation.rotating) {
             yaw = AngleUtils.getClosestDiagonal();
             closest90Yaw = AngleUtils.getClosest();
-            pitch = (float) (Math.random() * 2 - 1); // -1 - 1
+            pitch = (float) (Math.random() + 5); // -1 - 1
             if (FarmHelper.config.SShapeMacroType == Config.SMacroEnum.MUSHROOM.ordinal())
                 rotation.easeTo(yaw, pitch, (long) (600 + Math.random() * 200));
             else if (FarmHelper.config.SShapeMacroType == Config.SMacroEnum.MUSHROOM_ROTATE.ordinal()) {
@@ -124,7 +125,10 @@ public class MushroomMacroNew extends Macro<MushroomMacroNew.State> {
             changeState(State.NONE);
         switch (currentState) {
             case LEFT:
-                if (FarmHelper.gameState.rightWalkable) {
+                if (FarmHelper.gameState.backWalkable) {
+                    currentState = changeState(State.SWITCHNG_LANE);
+                }
+                else if (FarmHelper.gameState.rightWalkable) {
                     currentState = changeState(State.RIGHT);
                 } else if (!FarmHelper.gameState.leftWalkable) {
                     currentState = changeState(State.LEFT);
@@ -133,7 +137,7 @@ public class MushroomMacroNew extends Macro<MushroomMacroNew.State> {
                 }
 
                 if (FarmHelper.config.SShapeMacroType == Config.SMacroEnum.MUSHROOM_ROTATE.ordinal()) {
-                    pitch = (float) (Math.random() * 2 - 1); // -1 - 1
+                    pitch = (float) (Math.random() + 5); // -1 - 1
                     rotation.easeTo(closest90Yaw + 30, pitch, 400);
                 }
                 break;
@@ -146,7 +150,7 @@ public class MushroomMacroNew extends Macro<MushroomMacroNew.State> {
                     LogUtils.sendDebug("No direction found");
                 }
                 if (FarmHelper.config.SShapeMacroType == Config.SMacroEnum.MUSHROOM_ROTATE.ordinal()) {
-                    pitch = (float) (Math.random() * 2 - 1); // -1 - 1
+                    pitch = (float) (Math.random() +5); // -1 - 1
                     rotation.easeTo(closest90Yaw - 30, pitch, 400);
                 }
                 break;
@@ -172,6 +176,20 @@ public class MushroomMacroNew extends Macro<MushroomMacroNew.State> {
                 }
                 break;
             }
+            case SWITCHNG_LANE:
+                if (FarmHelper.gameState.rightWalkable) {
+                    KeyBindUtils.holdThese(
+                            Macro.mc.gameSettings.keyBindRight
+                    );
+                    changeState(State.RIGHT);
+
+                } else if (FarmHelper.gameState.leftWalkable) {
+                    changeState(State.LEFT);
+                    passedLane = 0;
+                } else {
+                    LogUtils.sendDebug("No direction found");
+                }
+                break;
             case NONE:
                 changeState(calculateDirection());
                 break;
@@ -215,7 +233,32 @@ public class MushroomMacroNew extends Macro<MushroomMacroNew.State> {
                     layerY = Macro.mc.thePlayer.getPosition().getY();
                     changeState(State.NONE);
                 }
+
                 break;
+
+            case SWITCHNG_LANE:
+
+
+
+                    if (passedLane >= 6) {
+                        KeyBindUtils.holdThese(
+                                Macro.mc.gameSettings.keyBindRight,
+                                Macro.mc.gameSettings.keyBindBack
+                        );
+                        if(FarmHelper.gameState.rightWalkable) {
+                            changeState(State.RIGHT);
+                            passedLane = 0;
+                        }
+                    } else {
+                        KeyBindUtils.holdThese(
+                                Macro.mc.gameSettings.keyBindBack
+
+                        );
+                        passedLane++;
+                    }
+
+
+
             case NONE: {
                 LogUtils.sendDebug("No direction found");
                 break;
