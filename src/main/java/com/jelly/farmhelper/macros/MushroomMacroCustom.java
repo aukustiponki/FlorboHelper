@@ -16,10 +16,12 @@ public class MushroomMacroCustom extends Macro<MushroomMacroCustom.State> {
         LEFT,
         RIGHT,
         DROPPING,
-        SWITCHNG_LANE,
+        SWITCHING_LANE,
+
         NONE
     }
     private int passedLane = 0;
+    private boolean walkedForward = false;
     public static float closest90Yaw = 0;
 
     @Override
@@ -125,11 +127,17 @@ public class MushroomMacroCustom extends Macro<MushroomMacroCustom.State> {
             changeState(State.NONE);
         switch (currentState) {
             case LEFT:
-                if (FarmHelper.gameState.backWalkable) {
-                    currentState = changeState(State.SWITCHNG_LANE);
-                }
-                else if (FarmHelper.gameState.rightWalkable) {
-                    currentState = changeState(State.RIGHT);
+                if (FarmHelper.gameState.rightWalkable) {
+                    if (FarmHelper.gameState.backWalkable) {
+                        if (walkedForward) {
+                            currentState = changeState(State.RIGHT);
+                            walkedForward = false;
+                        } else {
+                            currentState = changeState(State.SWITCHING_LANE);
+                        }
+
+                    }
+
                 } else if (!FarmHelper.gameState.leftWalkable) {
                     currentState = changeState(State.LEFT);
                 } else {
@@ -176,11 +184,8 @@ public class MushroomMacroCustom extends Macro<MushroomMacroCustom.State> {
                 }
                 break;
             }
-            case SWITCHNG_LANE:
+            case SWITCHING_LANE:
                 if (FarmHelper.gameState.rightWalkable) {
-                    KeyBindUtils.holdThese(
-                            Macro.mc.gameSettings.keyBindRight
-                    );
                     changeState(State.RIGHT);
 
                 } else if (FarmHelper.gameState.leftWalkable) {
@@ -190,6 +195,7 @@ public class MushroomMacroCustom extends Macro<MushroomMacroCustom.State> {
                     LogUtils.sendDebug("No direction found");
                 }
                 break;
+
             case NONE:
                 changeState(calculateDirection());
                 break;
@@ -214,16 +220,13 @@ public class MushroomMacroCustom extends Macro<MushroomMacroCustom.State> {
                 break;
             }
             case LEFT: {
-                if (FarmHelper.config.SShapeMacroType == Config.SMacroEnum.MUSHROOM_ROTATE.ordinal()) {
-                    KeyBindUtils.holdThese(
-                            Macro.mc.gameSettings.keyBindForward,
-                            Macro.mc.gameSettings.keyBindAttack
-                    );
-                } else if (FarmHelper.config.SShapeMacroType == Config.SMacroEnum.MUSHROOM.ordinal()) {
-                    KeyBindUtils.holdThese(
-                            mushroom45DegreeLeftSide() ? Macro.mc.gameSettings.keyBindForward : Macro.mc.gameSettings.keyBindLeft,
-                            Macro.mc.gameSettings.keyBindAttack
-                    );
+
+                KeyBindUtils.holdThese(
+                        Macro.mc.gameSettings.keyBindForward,
+                        Macro.mc.gameSettings.keyBindAttack
+                );
+                if (FarmHelper.gameState.frontWalkable) {
+                    walkedForward = true;
                 }
                 break;
             }
@@ -236,7 +239,7 @@ public class MushroomMacroCustom extends Macro<MushroomMacroCustom.State> {
 
                 break;
 
-            case SWITCHNG_LANE:
+            case SWITCHING_LANE:
 
 
 
