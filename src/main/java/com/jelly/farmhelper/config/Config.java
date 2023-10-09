@@ -32,17 +32,17 @@ import java.util.List;
 // THIS IS RAT - CatalizCS
 public class Config extends cc.polyfrost.oneconfig.config.Config {
 	private transient static final Minecraft mc = Minecraft.getMinecraft();
-	private transient static final String GENERAL = "General";
-	private transient static final String MISCELLANEOUS = "Miscellaneous";
-	private transient static final String FAILSAFE = "Failsafe";
-	private transient static final String SCHEDULER = "Scheduler";
-	private transient static final String JACOBS_CONTEST = "Jacob's Contest";
-	private transient static final String VISITORS_MACRO = "Visitors Macro";
-	private transient static final String DISCORD_INTEGRATION = "Discord Integration";
-	private transient static final String DELAYS = "Delays";
-	private transient static final String HUD = "HUD";
-	private transient static final String DEBUG = "Debug";
-	private transient static final String EXPERIMENTAL = "Experimental";
+	private transient static final String GENERAL = "GEBERAL";
+	private transient static final String MISCELLANEOUS = "MISKALENEUS";
+	private transient static final String FAILSAFE = "EPÄONNISTUMINEN";
+	private transient static final String SCHEDULER = "AJOITTAJA";
+	private transient static final String JACOBS_CONTEST = "JAAKOPI KISAILU";
+	private transient static final String VISITORS_MACRO = "VIERAILIJAPASKA";
+	private transient static final String DISCORD_INTEGRATION = "Discord E-Kitten";
+	private transient static final String DELAYS = "DELAYUS";
+	private transient static final String HUD = "HUDI";
+	private transient static final String DEBUG = "DEBAG";
+	private transient static final String EXPERIMENTAL = "EXPERMIERIMIMENTAL";
 
 	private transient static final File configRewarpFile = new File("farmhelper_rewarp.json");
 
@@ -110,7 +110,7 @@ public class Config extends cc.polyfrost.oneconfig.config.Config {
 	// START GENERAL
 
 	@DualOption(
-			name = "Macro Type", category = GENERAL, subcategory = "Macro",
+			name = "Makro tyyppi", category = GENERAL, subcategory = "Macro",
 			description = "The macro to use for farming",
 			left = "Vertical",
 			right = "S Shape",
