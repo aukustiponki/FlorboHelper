@@ -243,7 +243,7 @@ public class MushroomMacroCustom extends Macro<MushroomMacroCustom.State> {
 
 
 
-                    if (passedLane >= 6) {
+                    if (passedLane >= 10) {
                         KeyBindUtils.holdThese(
                                 Macro.mc.gameSettings.keyBindRight,
                                 Macro.mc.gameSettings.keyBindBack
