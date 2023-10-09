@@ -27,24 +27,24 @@ public class LogUtils {
     }
 
     public static void sendSuccess(String message) {
-        sendLog(new ChatComponentText("§2§lFarm Helper §8» §a" + message));
+        sendLog(new ChatComponentText("§2§lFlorbo Helper §8» §a" + message));
     }
     public static void sendWarning(String message) {
-        sendLog(new ChatComponentText("§6§lFarm Helper §8» §e" + message));
+        sendLog(new ChatComponentText("§6§lFlorbo Helper §8» §e" + message));
     }
     public static void sendError(String message) {
-        sendLog(new ChatComponentText("§4§lFarm Helper §8» §c" + message));
+        sendLog(new ChatComponentText("§4§lFlorbo Helper §8» §c" + message));
     }
     public static void sendDebug(String message) {
         if (lastDebugMessage != null && lastDebugMessage.equals(message)) return;
         if (FarmHelper.config.debugMode)
-            sendLog(new ChatComponentText("§3§lFarm Helper §8» §7" + message));
+            sendLog(new ChatComponentText("§3§lFlorbo Helper §8» §7" + message));
         else
-            System.out.println("Farm Helper » " + message);
+            System.out.println("Florbo Helper » " + message);
         lastDebugMessage = message;
     }
     public static void sendFailsafeMessage(String message) {
-        sendLog(new ChatComponentText("§5§lFarm Helper §8» §d§l" + message));
+        sendLog(new ChatComponentText("§5§lFlorbo Helper §8» §d§l" + message));
     }
 
     public static String getRuntimeFormat() {
@@ -68,7 +68,7 @@ public class LogUtils {
             long timeDiff = TimeUnit.MILLISECONDS.toMinutes(System.currentTimeMillis() - statusMsgTime);
             if (timeDiff > FarmHelper.config.statusUpdateInterval && FarmHelper.config.sendStatusUpdates) {
                 GameState.webhook.addEmbed(new DiscordWebhook.EmbedObject()
-                        .setTitle("Farm Helper")
+                        .setTitle("Florbo Helper")
                         .setDescription("```" + "I'm still alive!" + "```")
                         .setColor(Color.decode("#ff3b3b"))
                         .setFooter("Jelly", "")
@@ -99,7 +99,7 @@ public class LogUtils {
         sendDebug("Last webhook message: " + timeDiff);
         if (FarmHelper.config.sendLogs && (timeDiff > 20 || !Objects.equals(lastWebhook, message))) {
             GameState.webhook.addEmbed(new DiscordWebhook.EmbedObject()
-                .setDescription("**Farm Helper Log** ```" + message + "```")
+                .setDescription("**Florbo Helper Log** ```" + message + "```")
                 .setColor(Color.decode("#741010"))
                 .setFooter(mc.thePlayer.getName(), "")
             );
