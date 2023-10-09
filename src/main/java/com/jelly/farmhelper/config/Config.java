@@ -1103,6 +1103,12 @@ public class Config extends cc.polyfrost.oneconfig.config.Config {
 			description = "Prints to chat what the bot is currently executing. Useful if you are having issues."
 	)
 	public boolean debugMode = false;
+
+	@Switch(
+			name = "Funny Mode", category = DEBUG, subcategory = "Debug",
+			description = "Onni's shenanigans"
+	)
+	public boolean funnyMode = false;
 	@Switch(
 			name = "Hide Logs (Not Recommended)", category = DEBUG, subcategory = "Debug",
 			description = "Hides all logs from the console. Not recommended."
@@ -1277,7 +1283,8 @@ public class Config extends cc.polyfrost.oneconfig.config.Config {
 		this.addDependency("autoSetSpawnMinDelay", "enableAutoSetSpawn");
 		this.addDependency("autoSetSpawnMaxDelay", "enableAutoSetSpawn");
 
-		this.addDependency("debugMode", "Debug Mode", () -> !this.hideLogs);
+		this.addDependency("debugMode", "Debug Mode", () -> !this.funnyMode);
+		this.addDependency("funnyMode", "Funny Mode", () -> !this.hideLogs);
 		this.addDependency("hideLogs", "Hide Logs (Not Recommended)", () -> !this.debugMode);
 
 		this.addDependency("fastBreakSpeed", "fastBreak");
