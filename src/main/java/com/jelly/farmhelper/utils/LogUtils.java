@@ -35,10 +35,21 @@ public class LogUtils {
     public static void sendError(String message) {
         sendLog(new ChatComponentText("§4§lFlorbo Helper §8» §c" + message));
     }
+    public static void sendMessage(String message) {
+        sendLog(new ChatComponentText("§3§lFlorbo Helper §8» §7" + message));
+    }
+    public static void sendShenanigans(String message) {
+        if (FarmHelper.config.funnyMode) {
+            sendLog(new ChatComponentText("§3§lFlorbo Helper §8» §7" + message));
+        } else {
+            System.out.println("[WAS] >" + message);
+        }
+
+    }
     public static void sendDebug(String message) {
         if (lastDebugMessage != null && lastDebugMessage.equals(message)) return;
         if (FarmHelper.config.debugMode)
-            sendLog(new ChatComponentText("§3§lFlorbo Helper §8» §7" + message));
+            sendLog(new ChatComponentText("§3§lFlorbo Helper Debug §8» §7" + message));
         else
             System.out.println("Florbo Helper » " + message);
         lastDebugMessage = message;

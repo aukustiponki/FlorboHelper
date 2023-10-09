@@ -26,9 +26,9 @@ public class MixinGuiMainMenu {
             };
         }
 
-        if (UpdateGUI.outdated) {
-            this.splashText = "Update FarmHelper <3";
-        }
+
+        this.splashText = "It's not a war crime if you had fun! <3";
+
     }
 }
 
