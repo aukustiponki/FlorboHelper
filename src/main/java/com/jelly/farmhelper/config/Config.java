@@ -252,7 +252,11 @@ public class Config extends cc.polyfrost.oneconfig.config.Config {
 	// END GENERAL
 
 	// START MISCELLANEOUS
-
+	@Switch(
+			name = "Rewarp when not macroing", category = MISCELLANEOUS, subcategory = "Miscellaneous",
+			description = "Rewarps even when not macroing"
+	)
+	public boolean rewarpWhenNotMacroing = false;
 	@Switch(
 			name = "Xray Mode", category = MISCELLANEOUS, subcategory = "Miscellaneous",
 			description = "Hides blocks to reduce resource usage"

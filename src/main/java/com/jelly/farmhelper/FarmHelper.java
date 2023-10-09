@@ -67,6 +67,7 @@ public class FarmHelper {
         MinecraftForge.EVENT_BUS.register(new AutoCookie());
         MinecraftForge.EVENT_BUS.register(new AutoPot());
         MinecraftForge.EVENT_BUS.register(new BanwaveChecker());
+        MinecraftForge.EVENT_BUS.register(new RewarpWhenNotMacroing());
         if (Loader.isModLoaded("farmhelperjdadependency")) {
             MinecraftForge.EVENT_BUS.register(new DiscordBotHandler());
         }
