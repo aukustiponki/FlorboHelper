@@ -35,7 +35,7 @@ import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
 
-@Mod(modid = FarmHelper.MODID, name = FarmHelper.NAME, version = FarmHelper.VERSION)
+@Mod(modid = FarmHelper.MODID, name = FarmHelper.NAME, version = FarmHelper.VERSION, clientSideOnly = true)
 public class FarmHelper {
     public static final String MODID = "farmhelper";
     public static final String NAME = "Florbo Helper";
