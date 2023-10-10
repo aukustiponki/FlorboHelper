@@ -6,7 +6,6 @@
     "client.MixinPlayerControllerMP",
     "gui.MixinGuiContainer",
     "gui.MixinGuiEditSign",
-    "gui.MixinGuiInventory",
     "gui.MixinGuiMainMenu",
     "gui.MixinGuiMultiplayer",
     "gui.MixinGuiScreen",

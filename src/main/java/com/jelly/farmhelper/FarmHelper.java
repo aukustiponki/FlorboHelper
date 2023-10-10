@@ -15,6 +15,7 @@ import com.jelly.farmhelper.utils.TickTask;
 import com.jelly.farmhelper.utils.Utils;
 import com.jelly.farmhelper.world.GameState;
 import com.jelly.farmhelper.world.JacobsContestHandler;
+import lombok.Getter;
 import lombok.SneakyThrows;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.ClientCommandHandler;
@@ -49,12 +50,14 @@ public class FarmHelper {
     private static final Minecraft mc = Minecraft.getMinecraft();
     public static GameState gameState;
     public static PetSwapper petSwapper = new PetSwapper();
-
+    @Getter
+    public static float oldFov;
     public static Config config;
     public static Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+        oldFov = mc.gameSettings.fovSetting;
         setVersions();
         config = new Config();
         MinecraftForge.EVENT_BUS.register(this);
@@ -72,6 +75,7 @@ public class FarmHelper {
             MinecraftForge.EVENT_BUS.register(new DiscordBotHandler());
         }
         MinecraftForge.EVENT_BUS.register(new ProfitCalculator());
+        MinecraftForge.EVENT_BUS.register(new CrackMode());
         MinecraftForge.EVENT_BUS.register(new Utils());
         MinecraftForge.EVENT_BUS.register(new VisitorsMacro());
         MinecraftForge.EVENT_BUS.register(new Pinger());
