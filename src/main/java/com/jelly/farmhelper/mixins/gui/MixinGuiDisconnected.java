@@ -5,6 +5,7 @@ import com.jelly.farmhelper.FarmHelper;
 import com.jelly.farmhelper.features.AutoReconnect;
 import com.jelly.farmhelper.features.BanwaveChecker;
 import com.jelly.farmhelper.features.FailsafeNew;
+import com.jelly.farmhelper.features.Scheduler;
 import com.jelly.farmhelper.macros.MacroHandler;
 import com.jelly.farmhelper.remote.command.commands.ReconnectCommand;
 import net.minecraft.client.Minecraft;
@@ -43,6 +44,11 @@ public class MixinGuiDisconnected {
 
         if (ReconnectCommand.reconnectClock.isScheduled() || !ReconnectCommand.reconnectClock.passed()) {
             multilineMessage.set(0, "Time till reconnect: " + formatTime(ReconnectCommand.reconnectClock.getRemainingTime()));
+            multilineMessage = multilineMessage.subList(0, 1);
+        }
+
+        if (Scheduler.breakClock.isScheduled() || !Scheduler.breakClock.passed()) {
+            multilineMessage.set(0, "Disconnected due to scheduler break. Time till reconnect: " + formatTime(Scheduler.breakClock.getRemainingTime()));
             multilineMessage = multilineMessage.subList(0, 1);
         }
 

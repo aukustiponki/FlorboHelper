@@ -130,9 +130,11 @@ public class MushroomMacroCustom extends Macro<MushroomMacroCustom.State> {
                 if (FarmHelper.gameState.rightWalkable) {
                     if (FarmHelper.gameState.backWalkable) {
                         if (walkedForward) {
-                            currentState = changeState(State.RIGHT);
                             walkedForward = false;
+                            currentState = changeState(State.RIGHT);
+
                         } else {
+                            passedLane = 0;
                             currentState = changeState(State.SWITCHING_LANE);
                         }
 
@@ -262,6 +264,7 @@ public class MushroomMacroCustom extends Macro<MushroomMacroCustom.State> {
                         }
                     } else {
                         KeyBindUtils.holdThese(
+                                Macro.mc.gameSettings.keyBindLeft,
                                 Macro.mc.gameSettings.keyBindBack
 
                         );

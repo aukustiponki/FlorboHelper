@@ -636,6 +636,11 @@ public class Config extends cc.polyfrost.oneconfig.config.Config {
 	)
 	public boolean pauseSchedulerDuringJacobsContest = true;
 
+	@Switch(
+			name = "Disconnect during break", category = SCHEDULER, subcategory = "Scheduler", size = OptionSize.DUAL,
+			description = "Disconnects from the server during break"
+	)
+	public boolean disconnectDuringSchedulerBreak = false;
 	// END SCHEDULER
 
 	// START JACOB

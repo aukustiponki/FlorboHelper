@@ -32,7 +32,7 @@ public class AutoReconnect {
         if (ReconnectCommand.isEnabled) {
             if (ReconnectCommand.reconnectClock.getRemainingTime() > 0) {
                 return;
-            } else if (!((FailsafeNew.isJacobFailsafeExceeded && FarmHelper.config.enableJacobFailsafes) && (BanwaveChecker.banwaveOn && FarmHelper.config.enableLeaveOnBanwave))) {
+            } else if (!((FailsafeNew.isJacobFailsafeExceeded && FarmHelper.config.enableJacobFailsafes) && (BanwaveChecker.banwaveOn && FarmHelper.config.enableLeaveOnBanwave) && (Scheduler.isOnBreak()))) {
                 ReconnectCommand.isEnabled = false;
                 FMLClientHandler.instance().connectToServer(new GuiMultiplayer(new GuiMainMenu()), new ServerData("bozo", FarmHelper.gameState.serverIP, false));
             }
@@ -44,6 +44,14 @@ public class AutoReconnect {
             return;
         if (FailsafeNew.isJacobFailsafeExceeded && FarmHelper.config.enableJacobFailsafes)
             return;
+        if (FarmHelper.config.disconnectDuringSchedulerBreak && FarmHelper.config.enableScheduler) {
+            if (!Scheduler.isOnBreak() && mc.currentScreen instanceof GuiDisconnected) {
+                FMLClientHandler.instance().connectToServer(new GuiMultiplayer(new GuiMainMenu()), new ServerData("bozo", FarmHelper.gameState.serverIP, false));
+                return;
+            }
+            return;
+        }
+
         if (mc.currentScreen instanceof GuiDisconnected) {
             MacroHandler.disableCurrentMacro(true);
             if (waitTime >= (FarmHelper.config.delayBeforeReconnecting * 20)) {

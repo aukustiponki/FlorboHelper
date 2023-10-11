@@ -39,7 +39,8 @@ public class DiscordBotHandler extends ListenerAdapter {
                 new Reconnect(),
                 new Screenshot(),
                 new SetSpeed(),
-                new Info()));
+                new Info(),
+                new Connect()));
         LogUtils.sendDebug("Registered " + commands.size() + " commands");
     }
 
