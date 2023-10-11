@@ -122,7 +122,7 @@ public class GameState {
     }
 
     private location getLocation() {
-        if (ScoreboardUtils.getScoreboardLines().size() == 0) {
+        if (ScoreboardUtils.getScoreboardLines().isEmpty()) {
             if (BlockUtils.countCarpet() > 0) {
                 return location.LIMBO;
             }
