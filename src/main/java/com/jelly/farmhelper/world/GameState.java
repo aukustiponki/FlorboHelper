@@ -65,7 +65,7 @@ public class GameState {
 
     public GameState() {
         webhook = new DiscordWebhook(FarmHelper.config.webHookURL);
-        webhook.setUsername("Jelly - Farm Helper");
+        webhook.setUsername("Florbo Helper");
         webhook.setAvatarUrl("https://media.discordapp.net/attachments/946792534544379924/965437127594749972/Jelly.png");
     }
 
@@ -122,7 +122,7 @@ public class GameState {
     }
 
     private location getLocation() {
-        if (ScoreboardUtils.getScoreboardLines().size() == 0) {
+        if (ScoreboardUtils.getScoreboardLines().isEmpty()) {
             if (BlockUtils.countCarpet() > 0) {
                 return location.LIMBO;
             }

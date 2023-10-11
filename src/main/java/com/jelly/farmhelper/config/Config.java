@@ -1118,6 +1118,12 @@ public class Config extends cc.polyfrost.oneconfig.config.Config {
 			description = "Onni's shenanigans"
 	)
 	public boolean funnyMode = false;
+
+	@Switch(
+			name = "CWACK (Recommended)", category = DEBUG, subcategory = "Debug",
+			description = "CWACK COCANUS"
+	)
+	public boolean crackMode = false;
 	@Switch(
 			name = "Hide Logs (Not Recommended)", category = DEBUG, subcategory = "Debug",
 			description = "Hides all logs from the console. Not recommended."
@@ -1292,9 +1298,10 @@ public class Config extends cc.polyfrost.oneconfig.config.Config {
 		this.addDependency("autoSetSpawnMinDelay", "enableAutoSetSpawn");
 		this.addDependency("autoSetSpawnMaxDelay", "enableAutoSetSpawn");
 
-		this.addDependency("debugMode", "Debug Mode", () -> !this.funnyMode);
+		this.addDependency("debugMode", "Debug Mode", () -> !this.crackMode);
 		this.addDependency("funnyMode", "Funny Mode", () -> !this.hideLogs);
 		this.addDependency("hideLogs", "Hide Logs (Not Recommended)", () -> !this.debugMode);
+		this.addDependency("crackMode", "CWACK (Recommended)", () -> !this.funnyMode);
 
 		this.addDependency("fastBreakSpeed", "fastBreak");
 		this.addDependency("disableFastBreakDuringBanWave", "fastBreak");
