@@ -123,6 +123,6 @@ public class FarmHelper {
         Manifest manifest = new Manifest(new URL(manifestPath).openStream());
         Attributes attr = manifest.getMainAttributes();
         BOTVERSION = attr.getValue("botversion");
-        Display.setTitle(FarmHelper.NAME + " " + MODVERSION + " | Bing Chilling");
+        Display.setTitle(FarmHelper.NAME + MODVERSION + " | Bing Chilling");
     }
 }
